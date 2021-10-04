@@ -4,7 +4,6 @@ package com.phoenix.taskapp.ui.main;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,8 +35,8 @@ import com.phoenix.taskapp.viewmodels.SharedViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
-import java.util.function.LongFunction;
 
 public class fragment_detail extends Fragment{
     String curLabel;
@@ -168,6 +167,14 @@ public class fragment_detail extends Fragment{
         getChildFragmentManager().setFragmentResultListener("request",
                 getViewLifecycleOwner(), (requestKey, result) -> {
                     filterOnlyown.setText(result.getString("selectedItem"));
+                    if(result.getString("selectedItem").toLowerCase(Locale.ROOT).equals("yes"))
+                    {
+                        adapter.getFilter().filter("ownedyes");
+                    }
+                    else
+                    {
+                        adapter.getFilter().filter("ownedno");
+                    }
                     checkForNull();
                     cardonly.setChecked(true);
                     checkforClear();

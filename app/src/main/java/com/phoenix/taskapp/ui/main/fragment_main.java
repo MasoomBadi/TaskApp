@@ -1,6 +1,7 @@
 package com.phoenix.taskapp.ui.main;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -76,13 +77,14 @@ public class fragment_main extends Fragment {
         viewFavorite = view.findViewById(R.id.header_viewall_favorite);
         viewWishlist = view.findViewById(R.id.header_viewall_wishlist);
 
+        userOwnedIds = hashMap.get("Owned");
+
         loadOwnedItems();
         loadRecentItems();
         loadFavourites();
         loadWishlist();
 
         viewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
-        userOwnedIds = hashMap.get("Owned");
     }
 
     void loadOwnedItems() {

@@ -1,7 +1,6 @@
 package com.phoenix.taskapp.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,10 +67,6 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ItemHolder
         return searchFilter;
     }
 
-    public int getFilterSize() {
-        return searchList.size();
-    }
-
     static class ItemHolder extends RecyclerView.ViewHolder {
 
         MaterialTextView header, educator, tvnoresult;
@@ -94,8 +89,21 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ItemHolder
                 filterObjects.addAll(searchList);
             } else {
                 String filterPattern = charSequence.toString().toLowerCase(Locale.ROOT).trim();
+                if (filterPattern.toLowerCase(Locale.ROOT).equals("ownedyes")) {
+                    List<String> ownedId = new ArrayList<>();
+                    if (searchList.get(0).getOwnedIds() != null) {
+                        ownedId.addAll(searchList.get(0).getOwnedIds());
+                        for (int i = 0; i < ownedId.size(); i++) {
+                            String id = ownedId.get(i);
+                            for (int j = 0; j < searchList.size(); j++) {
+                                if (searchList.get(j).getId().equals(id)) {
+                                    filterObjects.add(searchList.get(j));
+                                }
+                            }
+                        }
+                    }
+                }
                 for (FilterObject object : searchList) {
-
                     if (object.getEducator().toLowerCase(Locale.ROOT).contains(filterPattern) ||
                             object.getTitle().toLowerCase(Locale.ROOT).contains(filterPattern) ||
                             object.getSkills().contains(charSequence) ||
