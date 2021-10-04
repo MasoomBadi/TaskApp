@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/AndroidStudioProjects/TaskApp/app/src/main/res/drawable/card_bg.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/TaskApp/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/AndroidStudioProjects/TaskApp/app/src/main/res/layout/bottomsheet.xml" value="0.153125" />
+        <entry key="..\:/AndroidStudioProjects/TaskApp/app/src/main/res/layout/item_bottomlist.xml" value="0.153125" />
+        <entry key="..\:/AndroidStudioProjects/TaskApp/app/src/main/res/layout/item_bottomskill.xml" value="0.153125" />
+        <entry key="..\:/AndroidStudioProjects/TaskApp/app/src/main/res/layout/item_detail.xml" value="0.153125" />
+        <entry key="..\:/AndroidStudioProjects/TaskApp/app/src/main/res/layout/items_recent.xml" value="0.153125" />
+        <entry key="..\:/AndroidStudioProjects/TaskApp/app/src/main/res/layout/layout_favourites.xml" value="0.153125" />
+        <entry key="..\:/AndroidStudioProjects/TaskApp/app/src/main/res/layout/layout_fragmentdetail.xml" value="0.153125" />
+        <entry key="..\:/AndroidStudioProjects/TaskApp/app/src/main/res/layout/layout_fragmentmain.xml" value="0.20416666666666666" />
+        <entry key="..\:/AndroidStudioProjects/TaskApp/app/src/main/res/layout/layout_header.xml" value="0.25" />
+        <entry key="..\:/AndroidStudioProjects/TaskApp/app/src/main/res/layout/layout_owned.xml" value="0.153125" />
+        <entry key="..\:/AndroidStudioProjects/TaskApp/app/src/main/res/layout/layout_owned_items.xml" value="0.25" />
+        <entry key="..\:/AndroidStudioProjects/TaskApp/app/src/main/res/layout/layout_recentlywatched.xml" value="0.153125" />
+        <entry key="..\:/AndroidStudioProjects/TaskApp/app/src/main/res/layout/layout_wishlist.xml" value="0.153125" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
