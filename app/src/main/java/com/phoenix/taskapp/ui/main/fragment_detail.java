@@ -4,6 +4,7 @@ package com.phoenix.taskapp.ui.main;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,7 @@ import com.phoenix.taskapp.viewmodels.SharedViewModel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.LongFunction;
 
 public class fragment_detail extends Fragment{
     String curLabel;
@@ -44,6 +46,7 @@ public class fragment_detail extends Fragment{
     RecyclerView rvDetail;
     DetailAdapter adapter;
 
+    
     MaterialTextView nosearch;
 
     List<String> ownedIDs;
@@ -72,6 +75,10 @@ public class fragment_detail extends Fragment{
     MaterialCardView cardSeries;
     MaterialTextView filterseries;
     LinearLayout layoutseries;
+
+    MaterialCardView cardclear;
+    MaterialTextView filterclear;
+    LinearLayout layoutclear;
 
     public fragment_detail(){
         super(R.layout.layout_fragmentdetail);
@@ -118,6 +125,10 @@ public class fragment_detail extends Fragment{
         filterseries= view.findViewById(R.id.filterseries);
         layoutseries = view.findViewById(R.id.layout_filterseries);
 
+        cardclear = view.findViewById(R.id.card_clear);
+        filterclear= view.findViewById(R.id.filterclear);
+        layoutclear = view.findViewById(R.id.layout_filterclear);
+
         layoutonly.setOnClickListener(view1 -> {
             BottomSheetOnlyOwn dialog = new BottomSheetOnlyOwn();
             dialog.show(getChildFragmentManager(), "Bottom");
@@ -155,13 +166,20 @@ public class fragment_detail extends Fragment{
         });
 
         getChildFragmentManager().setFragmentResultListener("request",
-                getViewLifecycleOwner(), (requestKey, result) -> filterOnlyown.setText(result.getString("selectedItem")));
+                getViewLifecycleOwner(), (requestKey, result) -> {
+                    filterOnlyown.setText(result.getString("selectedItem"));
+                    checkForNull();
+                    cardonly.setChecked(true);
+                    checkforClear();
+                });
 
         getChildFragmentManager().setFragmentResultListener("requestSkill",
                 getViewLifecycleOwner(), (requestKey, result) -> {
                     filterskill.setText(result.getString("selectedItemSkill"));
                     adapter.getFilter().filter(result.getString("selectedItemSkill"));
                     checkForNull();
+                    cardskill.setChecked(true);
+                    checkforClear();
                 });
 
         getChildFragmentManager().setFragmentResultListener("requestCurr",
@@ -169,6 +187,8 @@ public class fragment_detail extends Fragment{
                     filtercurriculum.setText(result.getString("selectedItemCurr"));
                     adapter.getFilter().filter(result.getString("selectedItemCurr"));
                     checkForNull();
+                    cardCurriculum.setChecked(true);
+                    checkforClear();
                 });
 
         getChildFragmentManager().setFragmentResultListener("requestStyle",
@@ -176,6 +196,8 @@ public class fragment_detail extends Fragment{
                     filterstyle.setText(result.getString("selectedItemStyle"));
                     adapter.getFilter().filter(result.getString("selectedItemStyle"));
                     checkForNull();
+                    cardskill.setChecked(true);
+                    checkforClear();
                 });
 
         getChildFragmentManager().setFragmentResultListener("requestEducator",
@@ -183,6 +205,8 @@ public class fragment_detail extends Fragment{
                     filtereducator.setText(result.getString("selectedItemEducator"));
                     adapter.getFilter().filter(result.getString("selectedItemEducator"));
                     checkForNull();
+                    cardEducator.setChecked(true);
+                    checkforClear();
                 });
 
         getChildFragmentManager().setFragmentResultListener("requestSeries",
@@ -190,8 +214,13 @@ public class fragment_detail extends Fragment{
                     filterseries.setText(result.getString("selectedItemSeries"));
                     adapter.getFilter().filter(result.getString("selectedItemSeries"));
                     checkForNull();
+                    cardSeries.setChecked(true);
+                    checkforClear();
                 });
 
+        cardclear.setOnClickListener(view17 -> {
+            clearFilters();
+        });
         catList = new ArrayList<>();
         ownedIDs = new ArrayList<>();
 
@@ -252,5 +281,40 @@ public class fragment_detail extends Fragment{
                 }
             }
         });
+    }
+    
+    void checkforClear()
+    {
+        if((cardonly.isChecked() || cardskill.isChecked()
+                || cardCurriculum.isChecked() || cardStyle.isChecked() ||
+                cardEducator.isChecked() || cardSeries.isChecked()))
+        {
+            cardclear.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            cardclear.setVisibility(View.GONE);
+        }
+    }
+
+    void clearFilters()
+    {
+        cardonly.setChecked(false);
+        cardskill.setChecked(false);
+        cardCurriculum.setChecked(false);
+        cardStyle.setChecked(false);
+        cardEducator.setChecked(false);
+        cardSeries.setChecked(false);
+
+        adapter.getFilter().filter("");
+
+        filterskill.setText("");
+        filterOnlyown.setText(requireActivity().getString(R.string.no));
+        filtercurriculum.setText("");
+        filterstyle.setText("");
+        filtereducator.setText("");
+        filterseries.setText("");
+
+        cardclear.setVisibility(View.GONE);
     }
 }

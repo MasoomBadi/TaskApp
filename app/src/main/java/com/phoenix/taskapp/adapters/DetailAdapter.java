@@ -95,9 +95,6 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ItemHolder
             } else {
                 String filterPattern = charSequence.toString().toLowerCase(Locale.ROOT).trim();
                 for (FilterObject object : searchList) {
-                    if (object.getSkills().contains("Intermediate")) {
-                        Log.d("Response", object.getTitle());
-                    }
 
                     if (object.getEducator().toLowerCase(Locale.ROOT).contains(filterPattern) ||
                             object.getTitle().toLowerCase(Locale.ROOT).contains(filterPattern) ||
