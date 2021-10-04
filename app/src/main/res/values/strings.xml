@@ -2,7 +2,6 @@
     <string name="app_name">Task App</string>
     <string name="imgUrl">https://d2xkd1fof6iiv9.cloudfront.net/images/courses/%1$s/169_820.jpg
 </string>
-    <string name="owned">Owned</string>
     <string name="view_all">View All</string>
     <string name="recently_watched">Recently Watched</string>
     <string name="favourites">Favorites</string>

@@ -46,10 +46,14 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ItemHolder
         holder.header.setText(items.getTitle());
         holder.educator.setText(items.getEducator());
 
-        if (getItemCount() == 0) {
-            holder.tvnoresult.setVisibility(View.VISIBLE);
-        } else {
-            holder.tvnoresult.setVisibility(View.GONE);
+        List<String> ids = new ArrayList<>();
+        ids.addAll(ownedItems.get(0).getOwnedIds());
+        if(ids.contains(items.getId())){
+            holder.labelowned.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            holder.labelowned.setVisibility(View.GONE);
         }
         Picasso.get().load(context.getString(R.string.imgUrl, items.getId()))
                 .fit()
@@ -69,7 +73,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ItemHolder
 
     static class ItemHolder extends RecyclerView.ViewHolder {
 
-        MaterialTextView header, educator, tvnoresult;
+        MaterialTextView header, educator, tvnoresult, labelowned;
         ImageView img;
 
         public ItemHolder(@NonNull View itemView) {
@@ -78,6 +82,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ItemHolder
             educator = itemView.findViewById(R.id.detail_item_educator);
             img = itemView.findViewById(R.id.detail_item_image);
             tvnoresult = itemView.findViewById(R.id.tv_noresult);
+            labelowned = itemView.findViewById(R.id.owned_label);
         }
     }
 
