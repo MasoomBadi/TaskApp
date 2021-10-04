@@ -1,7 +1,6 @@
 package com.phoenix.taskapp.ui.main;
 
 
-import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -9,13 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentResultListener;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -85,40 +82,26 @@ public class fragment_detail extends Fragment{
         filterskill= view.findViewById(R.id.filterskill);
         layoutskill = view.findViewById(R.id.layout_filterskill);
 
-        layoutonly.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                BottomSheetOnlyOwn dialog = new BottomSheetOnlyOwn();
-                dialog.show(getChildFragmentManager(), "Bottom");
-            }
+        layoutonly.setOnClickListener(view1 -> {
+            BottomSheetOnlyOwn dialog = new BottomSheetOnlyOwn();
+            dialog.show(getChildFragmentManager(), "Bottom");
         });
 
-        layoutskill.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        layoutskill.setOnClickListener(view12 -> {
 
-                BottomSheetSkill dialog = new BottomSheetSkill();
-                dialog.show(getChildFragmentManager(), "Skill");
-            }
+            BottomSheetSkill dialog = new BottomSheetSkill();
+            dialog.show(getChildFragmentManager(), "Skill");
         });
 
 
         getChildFragmentManager().setFragmentResultListener("request",
-                getViewLifecycleOwner(), new FragmentResultListener() {
-                    @Override
-                    public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                       filterOnlyown.setText(result.getString("selectedItem"));
-                    }
-                });
+                getViewLifecycleOwner(), (requestKey, result) -> filterOnlyown.setText(result.getString("selectedItem")));
 
         getChildFragmentManager().setFragmentResultListener("requestSkill",
-                getViewLifecycleOwner(), new FragmentResultListener() {
-                    @Override
-                    public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                        filterskill.setText(result.getString("selectedItemSkill"));
-                        adapter.getFilter().filter(result.getString("selectedItemSkill"));
-                        checkForNull();
-                    }
+                getViewLifecycleOwner(), (requestKey, result) -> {
+                    filterskill.setText(result.getString("selectedItemSkill"));
+                    adapter.getFilter().filter(result.getString("selectedItemSkill"));
+                    checkForNull();
                 });
         catList = new ArrayList<>();
         ownedIDs = new ArrayList<>();
