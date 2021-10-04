@@ -9,8 +9,8 @@
     <string name="wish_list">Wish List</string>
 
     <string name="search_hint">Search %1$s</string>
-    <string name="only_show_owned">Only Show Owned : </string>
-    <string name="skill">Skill : </string>
+    <string name="only_show_owned">Only Show Owned </string>
+    <string name="skill">Skill </string>
     <string name="curriculum">Curriculum</string>
     <string name="style">Style</string>
     <string name="educator">Educator</string>

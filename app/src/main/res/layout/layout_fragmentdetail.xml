@@ -113,6 +113,44 @@
                         android:id="@+id/filterskill"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:layout_marginStart="8dp"
+                android:id="@+id/card_curriculum"
+                android:focusable="true"
+                app:checkedIcon="@null"
+                style="@style/Widget.MaterialComponents.CardView"
+                app:cardCornerRadius="16dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:id="@+id/layout_filtercurriculum"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textSize="17sp"
+                        android:text="@string/curriculum"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableEnd="@drawable/ic_arrowdown"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginTop="2dp"
+                        android:textSize="17sp"
+                        android:id="@+id/filtercurriculum"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
     </HorizontalScrollView>
 

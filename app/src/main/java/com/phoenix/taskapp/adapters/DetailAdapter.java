@@ -47,12 +47,9 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ItemHolder
         holder.header.setText(items.getTitle());
         holder.educator.setText(items.getEducator());
 
-        if(getItemCount() == 0)
-        {
+        if (getItemCount() == 0) {
             holder.tvnoresult.setVisibility(View.VISIBLE);
-        }
-        else
-        {
+        } else {
             holder.tvnoresult.setVisibility(View.GONE);
         }
         Picasso.get().load(context.getString(R.string.imgUrl, items.getId()))
@@ -71,10 +68,10 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ItemHolder
         return searchFilter;
     }
 
-    public int getFilterSize()
-    {
+    public int getFilterSize() {
         return searchList.size();
     }
+
     static class ItemHolder extends RecyclerView.ViewHolder {
 
         MaterialTextView header, educator, tvnoresult;
@@ -104,7 +101,8 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ItemHolder
 
                     if (object.getEducator().toLowerCase(Locale.ROOT).contains(filterPattern) ||
                             object.getTitle().toLowerCase(Locale.ROOT).contains(filterPattern) ||
-                            object.getSkills().contains(charSequence)) {
+                            object.getSkills().contains(charSequence) ||
+                            object.getCurriculum().contains(charSequence)) {
                         filterObjects.add(object);
                     }
 

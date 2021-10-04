@@ -19,7 +19,7 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BottomSheetSkill extends BottomSheetDialogFragment {
+public class BottomSheetCurr extends BottomSheetDialogFragment {
 
     parseResponse parseResponse = new parseResponse();
     List<IndexClass> indexList;
@@ -28,7 +28,7 @@ public class BottomSheetSkill extends BottomSheetDialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.item_filterskill, container, false);
+        View view = inflater.inflate(R.layout.item_filtercurriculum, container, false);
 
         indexList = new ArrayList<>();
         list = new ArrayList<>();
@@ -40,11 +40,11 @@ public class BottomSheetSkill extends BottomSheetDialogFragment {
         }
 
         for(int i = 0; i < indexList.size(); i++){
-            List<String> skilllist = new ArrayList<>();
-            skilllist = indexList.get(i).getSkillTag();
-            for(int j = 0; j < skilllist.size(); j++)
+            List<String> curList = new ArrayList<>();
+            curList = indexList.get(i).getCurriculumTag();
+            for(int j = 0; j < curList.size(); j++)
             {
-                String skill = skilllist.get(j);
+                String skill = curList.get(j);
                 if(!list.contains(skill))
                 {
                     list.add(skill);
@@ -54,13 +54,13 @@ public class BottomSheetSkill extends BottomSheetDialogFragment {
 
 
 
-        ListView listView = view.findViewById(R.id.list_skills);
+        ListView listView = view.findViewById(R.id.list_curriculums);
         listView.setAdapter(new ListAdapter(requireContext(), list, new ListAdapter.OnClickListener() {
             @Override
             public void onClick(String input) {
                 Bundle bundle = new Bundle();
-                bundle.putString("selectedItemSkill", input);
-                getParentFragmentManager().setFragmentResult("requestSkill", bundle);
+                bundle.putString("selectedItemCurr", input);
+                getParentFragmentManager().setFragmentResult("requestCurr", bundle);
                 dismiss();
             }
         }));

@@ -25,6 +25,7 @@ import com.google.android.material.textview.MaterialTextView;
 import com.phoenix.taskapp.R;
 import com.phoenix.taskapp.adapters.DetailAdapter;
 import com.phoenix.taskapp.classes.FilterObject;
+import com.phoenix.taskapp.utils.BottomSheetCurr;
 import com.phoenix.taskapp.utils.BottomSheetOnlyOwn;
 import com.phoenix.taskapp.utils.BottomSheetSkill;
 import com.phoenix.taskapp.viewmodels.SharedViewModel;
@@ -52,6 +53,10 @@ public class fragment_detail extends Fragment{
     MaterialCardView cardskill;
     MaterialTextView filterskill;
     LinearLayout layoutskill;
+
+    MaterialCardView cardCurriculum;
+    MaterialTextView filtercurriculum;
+    LinearLayout layoutcurriculum;
 
     public fragment_detail(){
         super(R.layout.layout_fragmentdetail);
@@ -82,6 +87,10 @@ public class fragment_detail extends Fragment{
         filterskill= view.findViewById(R.id.filterskill);
         layoutskill = view.findViewById(R.id.layout_filterskill);
 
+        cardCurriculum = view.findViewById(R.id.card_curriculum);
+        filtercurriculum= view.findViewById(R.id.filtercurriculum);
+        layoutcurriculum = view.findViewById(R.id.layout_filtercurriculum);
+
         layoutonly.setOnClickListener(view1 -> {
             BottomSheetOnlyOwn dialog = new BottomSheetOnlyOwn();
             dialog.show(getChildFragmentManager(), "Bottom");
@@ -93,6 +102,11 @@ public class fragment_detail extends Fragment{
             dialog.show(getChildFragmentManager(), "Skill");
         });
 
+        layoutcurriculum.setOnClickListener(view13 -> {
+
+            BottomSheetCurr dialog = new BottomSheetCurr();
+            dialog.show(getChildFragmentManager(), "Curriculum");
+        });
 
         getChildFragmentManager().setFragmentResultListener("request",
                 getViewLifecycleOwner(), (requestKey, result) -> filterOnlyown.setText(result.getString("selectedItem")));
@@ -101,6 +115,13 @@ public class fragment_detail extends Fragment{
                 getViewLifecycleOwner(), (requestKey, result) -> {
                     filterskill.setText(result.getString("selectedItemSkill"));
                     adapter.getFilter().filter(result.getString("selectedItemSkill"));
+                    checkForNull();
+                });
+
+        getChildFragmentManager().setFragmentResultListener("requestCurr",
+                getViewLifecycleOwner(), (requestKey, result) -> {
+                    filtercurriculum.setText(result.getString("selectedItemCurr"));
+                    adapter.getFilter().filter(result.getString("selectedItemCurr"));
                     checkForNull();
                 });
         catList = new ArrayList<>();
