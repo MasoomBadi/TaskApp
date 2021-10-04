@@ -28,6 +28,7 @@ import com.phoenix.taskapp.classes.FilterObject;
 import com.phoenix.taskapp.utils.BottomSheetCurr;
 import com.phoenix.taskapp.utils.BottomSheetEducator;
 import com.phoenix.taskapp.utils.BottomSheetOnlyOwn;
+import com.phoenix.taskapp.utils.BottomSheetSeries;
 import com.phoenix.taskapp.utils.BottomSheetSkill;
 import com.phoenix.taskapp.utils.BottomSheetStyle;
 import com.phoenix.taskapp.viewmodels.SharedViewModel;
@@ -67,6 +68,10 @@ public class fragment_detail extends Fragment{
     MaterialCardView cardEducator;
     MaterialTextView filtereducator;
     LinearLayout layouteducator;
+
+    MaterialCardView cardSeries;
+    MaterialTextView filterseries;
+    LinearLayout layoutseries;
 
     public fragment_detail(){
         super(R.layout.layout_fragmentdetail);
@@ -109,6 +114,10 @@ public class fragment_detail extends Fragment{
         filtereducator= view.findViewById(R.id.filtereducator);
         layouteducator = view.findViewById(R.id.layout_filtereducator);
 
+        cardSeries = view.findViewById(R.id.card_series);
+        filterseries= view.findViewById(R.id.filterseries);
+        layoutseries = view.findViewById(R.id.layout_filterseries);
+
         layoutonly.setOnClickListener(view1 -> {
             BottomSheetOnlyOwn dialog = new BottomSheetOnlyOwn();
             dialog.show(getChildFragmentManager(), "Bottom");
@@ -136,6 +145,13 @@ public class fragment_detail extends Fragment{
 
             BottomSheetEducator dialog = new BottomSheetEducator();
             dialog.show(getChildFragmentManager(), "Educator");
+        });
+
+
+        layoutseries.setOnClickListener(view16 -> {
+
+            BottomSheetSeries dialog = new BottomSheetSeries();
+            dialog.show(getChildFragmentManager(), "Series");
         });
 
         getChildFragmentManager().setFragmentResultListener("request",
@@ -166,6 +182,13 @@ public class fragment_detail extends Fragment{
                 getViewLifecycleOwner(), (requestKey, result) -> {
                     filtereducator.setText(result.getString("selectedItemEducator"));
                     adapter.getFilter().filter(result.getString("selectedItemEducator"));
+                    checkForNull();
+                });
+
+        getChildFragmentManager().setFragmentResultListener("requestSeries",
+                getViewLifecycleOwner(), (requestKey, result) -> {
+                    filterseries.setText(result.getString("selectedItemSeries"));
+                    adapter.getFilter().filter(result.getString("selectedItemSeries"));
                     checkForNull();
                 });
 
