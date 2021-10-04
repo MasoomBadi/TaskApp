@@ -28,6 +28,7 @@ import com.phoenix.taskapp.classes.FilterObject;
 import com.phoenix.taskapp.utils.BottomSheetCurr;
 import com.phoenix.taskapp.utils.BottomSheetOnlyOwn;
 import com.phoenix.taskapp.utils.BottomSheetSkill;
+import com.phoenix.taskapp.utils.BottomSheetStyle;
 import com.phoenix.taskapp.viewmodels.SharedViewModel;
 
 import java.util.ArrayList;
@@ -57,6 +58,10 @@ public class fragment_detail extends Fragment{
     MaterialCardView cardCurriculum;
     MaterialTextView filtercurriculum;
     LinearLayout layoutcurriculum;
+
+    MaterialCardView cardStyle;
+    MaterialTextView filterstyle;
+    LinearLayout layoutstyle;
 
     public fragment_detail(){
         super(R.layout.layout_fragmentdetail);
@@ -91,6 +96,10 @@ public class fragment_detail extends Fragment{
         filtercurriculum= view.findViewById(R.id.filtercurriculum);
         layoutcurriculum = view.findViewById(R.id.layout_filtercurriculum);
 
+        cardStyle = view.findViewById(R.id.card_style);
+        filterstyle= view.findViewById(R.id.filterstyle);
+        layoutstyle = view.findViewById(R.id.layout_filterstyle);
+
         layoutonly.setOnClickListener(view1 -> {
             BottomSheetOnlyOwn dialog = new BottomSheetOnlyOwn();
             dialog.show(getChildFragmentManager(), "Bottom");
@@ -106,6 +115,12 @@ public class fragment_detail extends Fragment{
 
             BottomSheetCurr dialog = new BottomSheetCurr();
             dialog.show(getChildFragmentManager(), "Curriculum");
+        });
+
+        layoutstyle.setOnClickListener(view14 -> {
+
+            BottomSheetStyle dialog = new BottomSheetStyle();
+            dialog.show(getChildFragmentManager(), "Style");
         });
 
         getChildFragmentManager().setFragmentResultListener("request",
@@ -124,6 +139,14 @@ public class fragment_detail extends Fragment{
                     adapter.getFilter().filter(result.getString("selectedItemCurr"));
                     checkForNull();
                 });
+
+        getChildFragmentManager().setFragmentResultListener("requestStyle",
+                getViewLifecycleOwner(), (requestKey, result) -> {
+                    filterstyle.setText(result.getString("selectedItemStyle"));
+                    adapter.getFilter().filter(result.getString("selectedItemStyle"));
+                    checkForNull();
+                });
+
         catList = new ArrayList<>();
         ownedIDs = new ArrayList<>();
 
