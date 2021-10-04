@@ -103,7 +103,8 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ItemHolder
                             object.getTitle().toLowerCase(Locale.ROOT).contains(filterPattern) ||
                             object.getSkills().contains(charSequence) ||
                             object.getCurriculum().contains(charSequence) ||
-                            object.getStyles().contains(charSequence)) {
+                            object.getStyles().contains(charSequence) ||
+                            object.getEducator().toLowerCase(Locale.ROOT).contains(filterPattern)) {
                         filterObjects.add(object);
                     }
 

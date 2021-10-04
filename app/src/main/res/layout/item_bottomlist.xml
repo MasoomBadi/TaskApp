@@ -8,7 +8,6 @@
         android:id="@+id/list_option"
         android:textSize="18sp"
         android:padding="8dp"
-        android:layout_gravity="center"
-        android:gravity="center"
+        android:layout_marginStart="16dp"
         android:layout_height="wrap_content"/>
 </LinearLayout>
