@@ -18,4 +18,5 @@
     <string name="no_search_results_found">No search results found</string>
     <string name="no">No</string>
     <string name="clear_filters">Clear Filters</string>
+    <string name="owned">Owned</string>
 </resources>
