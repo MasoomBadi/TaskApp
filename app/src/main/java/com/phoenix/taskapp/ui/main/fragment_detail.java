@@ -117,15 +117,7 @@ public class fragment_detail extends Fragment{
                     public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                         filterskill.setText(result.getString("selectedItemSkill"));
                         adapter.getFilter().filter(result.getString("selectedItemSkill"));
-                        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-                            @Override
-                            public void onChanged() {
-                                super.onChanged();
-                                if(adapter.getItemCount() == 0){
-                                    Toast.makeText(requireContext(), "Zero", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
+                        checkForNull();
                     }
                 });
         catList = new ArrayList<>();
@@ -155,6 +147,7 @@ public class fragment_detail extends Fragment{
                 if(adapter.getFilter() != null)
                 {
                     adapter.getFilter().filter(charSequence);
+                    checkForNull();
                 }
             }
 
@@ -170,5 +163,22 @@ public class fragment_detail extends Fragment{
         super.onResume();
         Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar())
                 .setTitle(curLabel);
+    }
+
+    void checkForNull()
+    {
+        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                if(adapter.getItemCount() == 0){
+                    nosearch.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    nosearch.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 }
